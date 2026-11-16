@@ -156,8 +156,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 .ic svg{width:15px;height:15px;fill:currentColor}
 
 @media (max-width:900px){
-  .slide .in{grid-template-columns:1fr;gap:28px;align-content:center;padding-top:70px;padding-bottom:110px}
-  .slide .sleeve{justify-self:start;width:min(56vw,280px);order:-1}
+  .hero{height:auto;min-height:0}
+  #slides{display:grid}
+  .slide{position:relative;inset:auto;grid-area:1/1;overflow:hidden}
+  .slide .in{grid-template-columns:1fr;gap:24px;align-content:start;padding-top:84px;padding-bottom:20px}
+  .slide .sleeve{justify-self:start;width:min(64vw,280px);order:-1}
+  .ctl{position:relative;bottom:auto;padding:6px 0 30px}
   .slide::after{background:linear-gradient(180deg,rgba(9,9,10,.5) 0%,rgba(9,9,10,.75) 55%,var(--black) 100%)}
   .agrid{grid-template-columns:1fr;gap:44px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -166,10 +170,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   .tabs{display:none}
 }
 @media (max-width:600px){
-  .hero{height:auto;min-height:100svh}
   .slide h1,.slide h2{font-size:clamp(36px,11vw,54px)}
   .slide p{font-size:15px}
-  .ctl{bottom:22px}.arw{width:46px;height:46px}
+  .arw{width:46px;height:46px}
+  .slide .acts .pbtn{padding:12px 20px}
   .bar .wrap{height:60px}.bar img{height:24px}
   .sgrid{grid-template-columns:1fr}
   .trh{grid-template-columns:44px minmax(0,1fr) auto;gap:12px}
