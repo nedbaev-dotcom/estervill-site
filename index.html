@@ -59,7 +59,7 @@ body{background:transparent}
 .slide.on .bg{animation:drift 30s ease-in-out infinite alternate}
 @keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.12) translateY(-1.5%)}}
 .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,9,10,.86) 0%,rgba(9,9,10,.55) 45%,rgba(9,9,10,.15) 100%),linear-gradient(180deg,rgba(9,9,10,.35) 0%,transparent 25%,transparent 70%,var(--black) 100%)}
-.slide .in{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center;padding-top:40px}
+.slide .in{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center;padding-top:110px}
 .slide .txt{display:grid;gap:22px;transform:translateY(18px);opacity:0;transition:transform 1s .25s cubic-bezier(.2,.7,.2,1),opacity 1s .25s}
 .slide.on .txt{transform:none;opacity:1}
 .slide h1,.slide h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(46px,7vw,112px);line-height:.92;letter-spacing:.03em;text-transform:uppercase;text-wrap:balance}
@@ -75,8 +75,8 @@ body{background:transparent}
 .pbtn svg{width:12px;height:12px;fill:currentColor}
 
 .bar{position:absolute;top:0;left:0;right:0;z-index:6}
-.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:104px}
-.bar img{height:56px;width:auto}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:150px}
+.bar img{height:clamp(56px,6.5vw,104px);width:auto}
 .bar nav{display:flex;gap:28px}
 .bar nav a{text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#cfc7b8}
 .bar nav a:hover{color:#fff}
@@ -180,6 +180,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 .ic svg{width:15px;height:15px;fill:currentColor}
 
 @media (max-width:900px){
+  .bar .wrap{height:110px}
   .hero{height:auto;min-height:0}
   #slides{display:grid}
   .slide{position:relative;inset:auto;grid-area:1/1;overflow:hidden}
