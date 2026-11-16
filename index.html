@@ -75,8 +75,8 @@ body{background:transparent}
 .pbtn svg{width:12px;height:12px;fill:currentColor}
 
 .bar{position:absolute;top:0;left:0;right:0;z-index:6}
-.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
-.bar img{height:30px;width:auto}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:104px}
+.bar img{height:56px;width:auto}
 .bar nav{display:flex;gap:28px}
 .bar nav a{text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#cfc7b8}
 .bar nav a:hover{color:#fff}
@@ -183,14 +183,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   .hero{height:auto;min-height:0}
   #slides{display:grid}
   .slide{position:relative;inset:auto;grid-area:1/1;overflow:hidden}
-  .slide .in{grid-template-columns:1fr;gap:24px;align-content:start;padding-top:84px;padding-bottom:20px}
+  .slide .in{grid-template-columns:1fr;gap:24px;align-content:start;padding-top:128px;padding-bottom:20px}
   .slide .sleeve{justify-self:start;width:min(64vw,280px);order:-1}
   .ctl{position:relative;bottom:auto;padding:6px 0 30px}
   .slide::after{background:linear-gradient(180deg,rgba(9,9,10,.5) 0%,rgba(9,9,10,.75) 55%,var(--black) 100%)}
   .agrid{grid-template-columns:1fr;gap:44px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sgrid{grid-template-columns:1fr 1fr}
-  .bar nav{display:none}
+  .bar nav{gap:20px}
   .tabs{display:none}
 }
 @media (max-width:600px){
@@ -198,7 +198,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   .slide p{font-size:15px}
   .arw{width:46px;height:46px}
   .slide .acts .pbtn{padding:12px 20px}
-  .bar .wrap{height:60px}.bar img{height:24px}
+  .bar .wrap{height:auto;padding-top:16px;padding-bottom:6px;flex-direction:column;align-items:flex-start;gap:12px}.bar img{height:44px}
+  .bar nav{gap:0;justify-content:space-between;width:100%}.bar nav a{font-size:10px;letter-spacing:.16em}
   .sgrid{grid-template-columns:1fr}
   .trh{grid-template-columns:44px minmax(0,1fr) auto;gap:12px}
   .trh .n{display:none}
