@@ -18,7 +18,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-html,body{margin:0;background:var(--black);color:var(--cream);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.6}
+html,body{margin:0;color:var(--cream);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.6}
 img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
@@ -26,6 +26,16 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono);font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .label{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+
+
+/* ---------- MOSAIC BG ---------- */
+html{background:var(--black)}
+body{background:transparent}
+#mosaic{position:fixed;inset:-25% -25%;z-index:-1;display:grid;grid-template-columns:repeat(10,1fr);gap:10px;transform:rotate(-9deg);opacity:.16;filter:saturate(.8);animation:float 120s linear infinite alternate;pointer-events:none}
+#mosaic img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px}
+#veil{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,rgba(9,9,10,.35) 0%,rgba(9,9,10,.8) 70%,rgba(9,9,10,.95) 100%)}
+@keyframes float{from{translate:0 0}to{translate:-6% -10%}}
+@media (max-width:600px){#mosaic{grid-template-columns:repeat(6,1fr);inset:-30% -60%;opacity:.14}}
 
 /* ---------- HERO SLIDER ---------- */
 .hero{position:relative;height:min(100svh,880px);min-height:560px;overflow:hidden;background:var(--black)}
@@ -182,10 +192,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   .lyr{grid-template-columns:1fr}.lyr pre{grid-column:1}
   .player{grid-template-columns:40px minmax(0,1fr) auto}.player .pc{width:40px;height:40px}.ctr .prev{display:none}
 }
-@media (prefers-reduced-motion:reduce){.slide .bg,.player.playing .pc img{animation:none!important}*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){#mosaic,.slide .bg,.player.playing .pc img{animation:none!important}*{transition:none!important}}
 </style>
 </head>
 <body>
+<div id="mosaic" aria-hidden="true"></div><div id="veil" aria-hidden="true"></div>
 
 <header class="hero" id="top" aria-roledescription="карусель" aria-label="Альбомы">
   <div class="bar"><div class="wrap">
@@ -269,6 +280,11 @@ SG.forEach(t => t.img = t.cover);
 let list = null, idx = -1, cur = 0;
 const mins = a => Math.round(a.tracks.reduce((s,t)=>s+t.dur,0)/60);
 const two = n => String(n).padStart(2,'0');
+
+// Фоновый коллаж из обложек песен
+(() => { const C = []; AL.forEach(a => a.tracks.forEach(t => t.cover && C.push(t.cover))); const out = [];
+  for (let k=0;k<70;k++) out.push(C[(k*7+Math.floor(k/10)*3) % C.length]);
+  $('#mosaic').innerHTML = out.map(u => '<img src="'+u+'" alt="" loading="lazy" decoding="async">').join(''); })();
 
 // Слайдер альбомов
 $('#slides').innerHTML = AL.map((a,i) =>
