@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Эстервилл — На расстоянии голоса</title>
+<title>Эстервилл</title>
+<meta name="description" content="Эстервилл — песни Ромы Спасского. Альбомы «На расстоянии голоса», «Цепляешься за новое», «4 звука до утра».">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Onest:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Идея: расстояние между двумя людьми — это место, где звучит голос. Чёрная сцена, туман обложки, одна красная нота мостков. */
   --black:#09090a; --coal:#121113; --cream:#eee6d6; --mute:#8a8590; --fog:#d9cfe0; --red:#c4583c; --line:rgba(238,230,214,.11);
-  --display:"Forum", "Didot", "Bodoni 72", "Times New Roman", serif;
-  --body:"Onest", "Helvetica Neue", Arial, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --display:"Forum","Didot","Bodoni 72","Times New Roman",serif;
+  --body:"Onest","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -27,62 +27,70 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .mono{font-family:var(--mono);font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .label{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
 
-/* ---------- HERO ---------- */
-.hero{position:relative;height:min(100vh,62vw);min-height:520px;overflow:hidden;background:#cfc4d6}
-.stage{position:absolute;inset:0}
-.hero .pano{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 58%;animation:drift 40s ease-in-out infinite alternate}
-@keyframes drift{from{transform:scale(1.02)}to{transform:scale(1.08) translateY(-1%)}}
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(9,9,10,.0) 0%,rgba(9,9,10,0) 70%,rgba(9,9,10,.85) 93%,var(--black) 100%)}
-.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
-.bar{position:absolute;top:0;left:0;right:0;z-index:5}
-.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:76px}
-.bar img{height:30px;width:auto;filter:brightness(.18) sepia(.3)}
-.bar nav{display:flex;gap:28px}
-.bar nav a{text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#3a3240}
-.bar nav a:hover{color:#000}
-.split{position:absolute;inset:0;z-index:3;color:#231d29;pointer-events:none}
-.split h1{margin:0;font:inherit}
-.split .w{position:absolute;font-family:var(--display);font-weight:400;font-size:clamp(34px,5.4vw,92px);line-height:.95;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.split .l{left:5.5%;top:26%}
-.split .r{right:6.5%;top:26%;text-align:right}
-.split .sub{position:absolute;left:5.5%;top:calc(26% - 34px);font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#5d5265}
-.listen{position:absolute;z-index:4;left:50%;top:63%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
-.listen .dot{width:78px;height:78px;border-radius:50%;border:1px solid rgba(35,29,41,.45);display:grid;place-items:center;background:rgba(238,230,214,.25);backdrop-filter:blur(4px);transition:transform .4s, background .3s}
-.listen:hover .dot{transform:scale(1.06);background:rgba(238,230,214,.5)}
-.listen svg{width:22px;height:22px;fill:#231d29}
-.listen span{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#3a3240}
-.hint{position:absolute;z-index:4;left:0;right:0;bottom:26px;text-align:center}
-
-/* ---------- ALBUM ---------- */
-.album{padding:120px 0 40px}
-.agrid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
-.sleeve{position:sticky;top:40px;display:grid;gap:22px}
-.sleeve .cv{aspect-ratio:1;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
-.sleeve .cv img{width:100%;height:100%;object-fit:cover}
-.sleeve h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(34px,3.4vw,52px);line-height:1;letter-spacing:.03em;text-transform:uppercase;text-wrap:balance}
-.sleeve p{margin:0;color:var(--mute);max-width:44ch}
-.sleeve dl{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:0;font-size:14px}
-.sleeve dt{color:var(--mute)}
-.sleeve dd{margin:0}
-.pbtn{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--cream);padding:13px 24px;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:background .25s,color .25s}
-.pbtn:hover{background:var(--cream);color:var(--black)}
+/* ---------- HERO SLIDER ---------- */
+.hero{position:relative;height:min(100svh,880px);min-height:560px;overflow:hidden;background:var(--black)}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s linear .9s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .9s ease}
+.slide .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+.slide.on .bg{animation:drift 30s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.12) translateY(-1.5%)}}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,9,10,.86) 0%,rgba(9,9,10,.55) 45%,rgba(9,9,10,.15) 100%),linear-gradient(180deg,rgba(9,9,10,.35) 0%,transparent 25%,transparent 70%,var(--black) 100%)}
+.slide .in{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center;padding-top:40px}
+.slide .txt{display:grid;gap:22px;transform:translateY(18px);opacity:0;transition:transform 1s .25s cubic-bezier(.2,.7,.2,1),opacity 1s .25s}
+.slide.on .txt{transform:none;opacity:1}
+.slide h1,.slide h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(46px,7vw,112px);line-height:.92;letter-spacing:.03em;text-transform:uppercase;text-wrap:balance}
+.slide p{margin:0;color:#cfc7b8;max-width:42ch}
+.slide .meta{display:flex;gap:18px;flex-wrap:wrap}
+.slide .acts{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.slide .sleeve{justify-self:end;width:min(100%,430px);aspect-ratio:1;box-shadow:0 50px 100px rgba(0,0,0,.65);transform:translateY(24px) rotate(1.5deg);opacity:0;transition:transform 1.1s .1s cubic-bezier(.2,.7,.2,1),opacity 1s .1s}
+.slide.on .sleeve{transform:none;opacity:1}
+.slide .sleeve img{width:100%;height:100%;object-fit:cover}
+.pbtn{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--cream);padding:13px 24px;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s}
+.pbtn:hover,.pbtn.solid{background:var(--cream);color:var(--black)}
+.pbtn.solid:hover{background:transparent;color:var(--cream)}
 .pbtn svg{width:12px;height:12px;fill:currentColor}
 
-.tracks{list-style:none;margin:0;padding:0;counter-reset:t}
+.bar{position:absolute;top:0;left:0;right:0;z-index:6}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
+.bar img{height:30px;width:auto}
+.bar nav{display:flex;gap:28px}
+.bar nav a{text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#cfc7b8}
+.bar nav a:hover{color:#fff}
+
+.ctl{position:absolute;z-index:6;left:0;right:0;bottom:34px}
+.ctl .wrap{display:flex;align-items:center;gap:22px}
+.arw{width:54px;height:54px;border-radius:50%;border:1px solid rgba(238,230,214,.35);display:grid;place-items:center;transition:background .25s,border-color .25s}
+.arw:hover{background:var(--cream);border-color:var(--cream);color:var(--black)}
+.arw svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5}
+.count{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:#cfc7b8;min-width:70px;text-align:center}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tabs button{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);padding:8px 2px;margin:0 8px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+.tabs button[aria-selected="true"]{color:var(--cream);border-color:var(--red)}
+.prog{position:absolute;left:0;bottom:0;height:2px;background:var(--red);width:0;z-index:6;transition:width .6s ease}
+
+/* ---------- ALBUM ---------- */
+.album{padding:110px 0 40px}
+.ahead{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.ahead h2{margin:8px 0 0;font-family:var(--display);font-weight:400;font-size:clamp(38px,4.6vw,68px);line-height:.95;letter-spacing:.03em;text-transform:uppercase}
+.atabs{display:flex;gap:4px;flex-wrap:wrap}
+.atabs button{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:1px solid var(--line);border-radius:999px;font-size:14px;transition:border-color .25s,background .25s}
+.atabs button img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.atabs button[aria-selected="true"]{border-color:var(--cream);background:rgba(238,230,214,.06)}
+.tracks{list-style:none;margin:0;padding:0}
 .tr{border-top:1px solid var(--line)}
 .tr:last-child{border-bottom:1px solid var(--line)}
-.trh{display:grid;grid-template-columns:52px minmax(0,1fr) auto auto;gap:18px;align-items:baseline;width:100%;text-align:left;padding:20px 4px}
+.trh{display:grid;grid-template-columns:44px 56px minmax(0,1fr) auto auto;gap:18px;align-items:center;width:100%;padding:12px 4px}
 .trh .n{font-family:var(--mono);font-size:12px;color:var(--mute)}
-.trh .t{text-align:left;font-family:var(--display);font-size:clamp(26px,2.5vw,38px);line-height:1.1;letter-spacing:.01em;transition:color .25s, transform .35s}
+.trh .th{width:56px;height:56px;object-fit:cover;background:var(--coal)}
+.trh .t{text-align:left;font-family:var(--display);font-size:clamp(24px,2.4vw,36px);line-height:1.1;transition:color .25s,transform .35s}
 .trh .d{font-family:var(--mono);font-size:12px;color:var(--mute)}
-.trh .x{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid transparent}
+.trh .x{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid transparent;min-width:56px;text-align:right}
 .tr:hover .t{transform:translateX(6px)}
 .tr.now .t,.tr.now .n{color:var(--red)}
 .tr .x:hover{color:var(--cream);border-color:var(--cream)}
-.lyr{display:grid;grid-template-columns:52px 200px minmax(0,1fr);gap:18px;padding:0 4px 28px}
+.lyr{display:grid;grid-template-columns:118px minmax(0,1fr);gap:18px;padding:6px 4px 30px}
 .lyr[hidden]{display:none}
-.lyr img{grid-column:2;width:200px;aspect-ratio:1;object-fit:cover}
-.lyr pre{grid-column:3;margin:0;white-space:pre-wrap;font-family:var(--display);font-size:20px;line-height:1.55;color:var(--fog)}
+.lyr pre{grid-column:2;margin:0;white-space:pre-wrap;font-family:var(--display);font-size:20px;line-height:1.55;color:var(--fog);columns:2 300px;column-gap:48px}
 
 /* ---------- COVERS WALL ---------- */
 .wall{padding:110px 0 30px}
@@ -91,21 +99,20 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .head p{margin:0;color:var(--mute);max-width:40ch}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
 .cell{position:relative;aspect-ratio:1;overflow:hidden;background:var(--coal)}
-.cell img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .5s}
-.cell:hover img{transform:scale(1.06);filter:brightness(.55)}
-.cell .cap{position:absolute;inset:auto 0 0 0;padding:18px;display:flex;justify-content:space-between;align-items:end;opacity:0;transform:translateY(8px);transition:.4s;text-align:left}
+.cell img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .5s}
+.cell:hover img{transform:scale(1.05);filter:brightness(.5)}
+.cell .cap{position:absolute;inset:auto 0 0 0;padding:16px;display:flex;justify-content:space-between;align-items:end;gap:10px;opacity:0;transform:translateY(8px);transition:.4s;text-align:left}
 .cell:hover .cap,.cell:focus-visible .cap,.cell.now .cap{opacity:1;transform:none}
-.cell .cap b{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1}
+.cell .cap b{font-family:var(--display);font-weight:400;font-size:22px;line-height:1.1}
+.cell .cap small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#cfc7b8}
 .cell .cap i{font-style:normal;width:40px;height:40px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
 .cell .cap svg{width:14px;height:14px;fill:#fff}
-.cell:first-child{grid-column:span 2;grid-row:span 2}
-.cell:first-child .cap b{font-size:34px}
 .cell.now{outline:2px solid var(--red);outline-offset:-2px}
 
 /* ---------- SINGLES ---------- */
 .singles{padding:110px 0 30px}
 .sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-.single{display:grid;gap:14px;text-decoration:none}
+.single{display:grid;gap:14px}
 .single .cv{aspect-ratio:1;overflow:hidden;background:var(--coal)}
 .single .cv img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
 .single:hover .cv img{transform:scale(1.04)}
@@ -117,10 +124,10 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 
 /* ---------- ABOUT ---------- */
 .about{padding:120px 0 40px}
-.about .agrid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.agrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px}
 .quote{font-family:var(--display);font-size:clamp(28px,3vw,44px);line-height:1.2;margin:14px 0 30px;text-wrap:balance}
 .about p{max-width:60ch;color:#cfc7b8}
-.links{display:grid;gap:0;align-content:start;border-top:1px solid var(--line)}
+.links{display:grid;align-content:start;border-top:1px solid var(--line)}
 .links a,.links div{display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--display);font-size:28px}
 .links a span,.links div span{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);align-self:center}
 .links a:hover{color:var(--red)}
@@ -137,6 +144,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 @keyframes spin{to{transform:rotate(360deg)}}
 .pi{min-width:0}
 .pi b{display:block;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.pi b span{color:var(--mute)}
 .seek{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--mute)}
 .seek input{flex:1;min-width:40px;accent-color:var(--red);height:2px}
 .ctr{display:flex;gap:4px;align-items:center}
@@ -146,63 +154,54 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 .ic svg{width:15px;height:15px;fill:currentColor}
 
 @media (max-width:900px){
-  .agrid,.about .agrid{grid-template-columns:1fr;gap:44px}
-  .sleeve{position:static;grid-template-columns:160px minmax(0,1fr);align-items:center}
-  .sleeve .txt{display:grid;gap:14px}
+  .slide .in{grid-template-columns:1fr;gap:28px;align-content:center;padding-top:70px;padding-bottom:110px}
+  .slide .sleeve{justify-self:start;width:min(56vw,280px);order:-1}
+  .slide::after{background:linear-gradient(180deg,rgba(9,9,10,.5) 0%,rgba(9,9,10,.75) 55%,var(--black) 100%)}
+  .agrid{grid-template-columns:1fr;gap:44px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sgrid{grid-template-columns:1fr 1fr}
-  .lyr{grid-template-columns:1fr}.lyr img{grid-column:1;width:140px}.lyr pre{grid-column:1}
   .bar nav{display:none}
+  .tabs{display:none}
 }
 @media (max-width:600px){
-  .hero{height:auto;min-height:0;background:var(--black);overflow:visible}
-  .hero::after{display:none}
-  .stage{position:relative;aspect-ratio:16/10;overflow:hidden}
-  .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,var(--black))}
-  .split{position:static;color:var(--cream);padding:18px 7% 8px}
-  .split .w{position:static;display:block;font-size:clamp(30px,10vw,44px);text-align:left}
-  .split .sub{position:static;margin-top:14px;color:var(--mute)}
-  .listen{top:62%}.listen .dot{width:54px;height:54px}.listen span{display:none}
-  .bar .wrap{height:56px}.bar img{height:24px}
-  .sleeve{grid-template-columns:1fr}
+  .hero{height:auto;min-height:100svh}
+  .slide h1,.slide h2{font-size:clamp(36px,11vw,54px)}
+  .slide p{font-size:15px}
+  .ctl{bottom:22px}.arw{width:46px;height:46px}
+  .bar .wrap{height:60px}.bar img{height:24px}
   .sgrid{grid-template-columns:1fr}
-  .trh{grid-template-columns:30px minmax(0,1fr) auto;gap:12px}
-  .trh .x{grid-column:2;justify-self:start}
+  .trh{grid-template-columns:44px minmax(0,1fr) auto;gap:12px}
+  .trh .n{display:none}
+  .trh .x{grid-column:2;justify-self:start;text-align:left}
+  .lyr{grid-template-columns:1fr}.lyr pre{grid-column:1}
   .player{grid-template-columns:40px minmax(0,1fr) auto}.player .pc{width:40px;height:40px}.ctr .prev{display:none}
 }
-@media (prefers-reduced-motion:reduce){.hero .pano,.player.playing .pc img{animation:none}*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){.slide .bg,.player.playing .pc img{animation:none!important}*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<header class="hero" id="top">
- <div class="stage">
-  <img class="pano" src="img/hero.jpg" alt="Двое стоят на мостках по разные стороны туманного озера">
-  <canvas id="wave" aria-hidden="true"></canvas>
+<header class="hero" id="top" aria-roledescription="карусель" aria-label="Альбомы">
   <div class="bar"><div class="wrap">
-    <img src="img/logo.png" alt="Эстервилл">
-    <nav aria-label="Разделы"><a href="#album">Альбом</a><a href="#songs">Песни</a><a href="#singles">Синглы</a><a href="#about">О группе</a></nav>
+    <a href="#top"><img src="img/logo.png" alt="Эстервилл"></a>
+    <nav aria-label="Разделы"><a href="#album">Альбомы</a><a href="#songs">Песни</a><a href="#singles">Синглы</a><a href="#about">О группе</a></nav>
   </div></div>
-  <button class="listen" id="heroPlay" type="button" aria-label="Слушать альбом с начала">
-    <span class="dot"><svg viewBox="0 0 24 24" id="heroIco"><path d="M7 4l13 8-13 8z"/></svg></span>
-    <span id="heroTxt">Слушать</span>
-  </button>
- </div>
-  <div class="split"><h1><span class="w l">На расстоянии</span> <span class="w r">голоса</span></h1><div class="sub">Эстервилл · новый альбом · 2026</div></div>
+  <div id="slides"></div>
+  <div class="ctl"><div class="wrap">
+    <button class="arw" id="sPrev" type="button" aria-label="Предыдущий альбом"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="count" id="sCount">01 / 03</span>
+    <button class="arw" id="sNext" type="button" aria-label="Следующий альбом"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="tabs" id="sTabs" role="tablist"></div>
+  </div></div>
+  <div class="prog" id="prog"></div>
 </header>
 
 <main>
 <section class="album" id="album">
-  <div class="wrap agrid">
-    <div class="sleeve">
-      <div class="cv"><img src="img/album1.jpg" alt="Обложка альбома «На расстоянии голоса»"></div>
-      <div class="txt">
-        <span class="label">Альбом · 2026</span>
-        <h2>На расстоянии голоса</h2>
-        <p id="aNote"></p>
-        <dl><dt>Музыка и слова</dt><dd>Рома Спасский</dd><dt>Аранжировка</dt><dd>Дмитрий Недбаев</dd><dt>Треков</dt><dd id="aCount" class="mono"></dd></dl>
-        <div><button class="pbtn" id="albumPlay" type="button"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg>Слушать альбом</button></div>
-      </div>
+  <div class="wrap">
+    <div class="ahead">
+      <div><span class="label" id="aLabel"></span><h2 id="aTitle"></h2></div>
+      <div class="atabs" id="aTabs" role="tablist" aria-label="Выбор альбома"></div>
     </div>
     <ol class="tracks" id="tracks"></ol>
   </div>
@@ -210,7 +209,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <section class="wall" id="songs">
   <div class="wrap">
-    <div class="head"><div><span class="label">У каждой песни — своя картина</span><h2>Песни</h2></div><p>Каждой песне альбома нарисована своя сцена из её текста. Нажмите на картину, чтобы услышать песню.</p></div>
+    <div class="head"><div><span class="label">У каждой песни — своя обложка</span><h2>Песни</h2></div><p>Нажмите на обложку, чтобы послушать песню.</p></div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
@@ -228,7 +227,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
       <span class="label">О группе</span>
       <p class="quote">Песни о том, что люди бывают далеко, а голос ещё держит связь.</p>
       <p>Эстервилл — группа Ромы Спасского: он пишет музыку и слова и поёт. Группа родом из Кирова, в 2000-х она выступала на фестивалях «Рок-Подъём» в Кирове и «СДВИГ» в Вологде.</p>
-      <p>В 2020 году вышли синглы «Ничья вина», «Вьются» и «Эзотерика». Новый альбом «На расстоянии голоса» группа собрала из песен, написанных за последние годы.</p>
+      <p>В 2020 году вышли синглы «Ничья вина», «Вьются» и «Эзотерика». Теперь группа выпускает три альбома: «На расстоянии голоса», «Цепляешься за новое» и «4 звука до утра».</p>
     </div>
     <div class="links" id="listen">
       <span class="label" style="padding:0 0 14px">Слушать на площадках</span>
@@ -242,7 +241,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 <footer><div class="wrap"><span>© Эстервилл</span><span>Музыка и слова — Рома Спасский</span></div></footer>
 
 <div class="player" id="player" aria-label="Плеер">
-  <div class="pc"><img id="pCover" src="img/album1.jpg" alt=""></div>
+  <div class="pc"><img id="pCover" src="" alt=""></div>
   <div class="pi"><b id="pTitle">—</b><div class="seek"><span id="tCur">0:00</span><input id="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Позиция в треке"><span id="tDur">0:00</span></div></div>
   <div class="ctr">
     <button class="ic prev" id="prev" type="button" aria-label="Предыдущий трек"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
@@ -253,86 +252,103 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 <audio id="audio" preload="none"></audio>
 
 <script>
-const DATA = {"albums": [{"id": "voice", "title": "На расстоянии голоса", "kind": "Альбом", "year": "2026", "cover": "img/album1.jpg", "note": "Семнадцать песен о близости и расстоянии, о встрече и расставании.", "credits": ["Музыка и слова — Рома Спасский", "Аранжировка — Дмитрий Недбаев"], "tracks": [{"n": 1, "title": "Роботы", "src": "audio/01.mp3", "cover": "img/t01.jpg", "dur": 184, "lyrics": "1.\nМои идеально детали подходят к твоим.\nМы врозь моментально находим того с кем не спим.\n\nВ итоге ментальным искусственным кодом машин\nМы вычислены, и мы вычленены из руин.\n\nВсе винтики, гаечки, шильдики, \nТок, провода. \nКолечки, сердечки, цепочки, тату навсегда. \n\nПо венам течёт то ли нет, то ли все-таки кровь.\nТы копии наши с тобой сохрани, приготовь. \n\nПр.\nРоботы мы оба. Ты и я.\nВ любовь до гроба,\nПоиграли мы немного\nИ адью.\n\nСитуация убога,\nПопрошу еще у Бога.\nВ код твой может \nКак-нибудь себя залью.\n\n2.\nТвоя батарея заряжена больше моей. \nЧуть выше, левее, стучит? Значит я ещё с ней.\n\nМеханика краника тоже бывают сбоИ.\nНо мы в симуляции-вот симулируй, ори!\n\nСотри все штрихкоды, серийники тоже замажь.\nСмотри-пешеходы кругом, и у каждого стаж.\n\nУ каждого сейвы свои и наборы программ.\nЯ наши с тобой никому никогда не отдам. \n\nПр.\nРоботы мы оба. Ты и я.\nВ любовь до гроба \nПоиграли мы немного,\nИ адью.\n\nСитуация убога,\nПопрошу еще у Бога.\nВ код твой может \nСам себя перезалью."}, {"n": 2, "title": "Возле", "src": "audio/02.mp3", "cover": "img/t02.jpg", "dur": 177, "lyrics": "1.Глухо на проводе, я на том проводе, \nЛето уж проводы. Может быть поводом \n\nМожет быть неводом, может быть рыбой,\nА может быть все это было не здесь\n\nИли, как водится кто-то заводится,\nКто-то разводится, кто-то в раю в Ницце. \n\nНо не потея за эти маразмы же \nМы же с тобой независимый весь!\n\nПР. Стой, я поведу, я понесу, и не уйду.\nЯ по другому не могу…\n\nСтой, выключи свет, \nНе забывай наших побед.\n\nНе улетай. Маме привет. Только скажи: до свидания.\n\n2.Жести добавишь ли? Вроде года-то шли.\nВроде куда-то шли, в моде опять дожди.\n\nСны и паребрики, возле Москва-реки,\nВозле твоей руки вот бы мою!\n \nРобко на таймере мир остановлен. \nВо сколько? Давай удиви. Ноу проблем.\n\nЯ возле, я рядом, я здесь, я обычный же.\nПросто, как раньше тихонечко пни…\n\nМы это то, что однажды закончится.\nЗнаем и видели. Колется, хочется. \n\nМожет сегодня иначе подпрыгивать?\nМожет сегодня побуду собой. \n\nПР. Стой, я поведу, я понесу, и не уйду.\nЯ по другому не могу…\n\nСтой, выключи свет, \nНе забывай наших побед.\n\nНе убегай. Маме привет. Только скажи: до свидания."}, {"n": 3, "title": "Цепляешься за новое", "src": "audio/03.mp3", "cover": "img/t03.jpg", "dur": 225, "lyrics": "В самолет. Тебя так далеко никто не повезёт.\nТам время замерзает-так что подождет. \nОпять декабрь - и десять раз, как ровно год. \n\nИ ползет твой мир нелепый то назад, а то вперед. \nОт лета к лету, но внутри поэт поёт. \nИ как ни просишь Бога - все равно поёт. \n\nПр. \nЦепляешься за новое. \nТебя почти слепого и\nГлухого на мели помяли. \nИз петли достали. \nТолько не пыли. \nМы знать не знали-не были. \nВ вино слезами. Могли бы сами…\n\nВсе вены забинтованы. \nВсе переименованы контакты. \nИ в сети хоть как ты не свети-тобой разочарованы. \n\nПеред сном наивно, но опять попросишь об одном.\nКоторый раз пойдёшь курить перед окном.\nИ день за днём, за годом год - всё об одном.\nА потом Вселенная ругается, и бьёт ключом. \nНикак не получается к плечу плечом.\nПора уже отчаяться-я вот о чем."}, {"n": 4, "title": "Кроет", "src": "audio/04.mp3", "cover": "img/t04.jpg", "dur": 180, "lyrics": "Вдруг, смотри, как обычно стучит. \nТот стук, возможно тебя тяготит? \n\nКрик, как прежде увидел покой. \nВозник. И снова все зря. Боже мой.\n\nПр.\n\nКроет. Увезли под конвоем! \nОт тебя меня кроет. \nТы летишь, а я вою, ною…\n\nНо я, если сдохну то стоя,\nЕсли сдамся, то for you.\nЯ не лопну, укрою.\nК бою!\n\n2.\nОк. Оставим дела на потом. \nЯ смог. Ведь я твой листок-ты мой дом. \n\nНо, теперь по другому нельзя. \nКак жаль. \nТеперь не враги, не друзья. \n\nПр.\n\nКроет. Увезли под конвоем! \nОт тебя меня кроет. \nТы летишь, а я вою, ною…\n\nНо я, если сдохну - то стоя\nЕсли сдамся, то for you.\nЯ не лопну, укрою. \nК бою!"}, {"n": 5, "title": "Оставляю", "src": "audio/05.mp3", "cover": "img/t05.jpg", "dur": 204, "lyrics": "Вот оно как происходит, \nПросто проходит и пройдёт.\nИщет нас, но не находит. \nЗначит кого-то ещё найдёт.\n\nМожет забудет когда-то,\nМожет не будет больше ждать.\nМожет и мы от утраты \nСможем куда-то убежать.\n\nПр.\n\nЯ таю\nИ мосты \nИ ты. Скучаю \nИ мечты \n\nОставляю\nВам двоим \nНе спим\nМолчим\n\n2.\nИ не помеха погода \nДо лета пол года, ну и пусть.\nВ поисках нового года \nДавиться свободой, но дождусь.\n\nМожет быть вспомнишь об этом,\nНо не приветов, и не звонков.\nНовые ваши сюжеты. \nСекреты придуманных врагов."}, {"n": 6, "title": "4 звука", "src": "audio/06.mp3", "cover": "img/t06.jpg", "dur": 236, "lyrics": "Вот теперь молчи и слушай \nРастворяя боль в вине.\nВ голове четыре звука,\nПосижу наедине с тобой.\n\nИ плевать. Такое дело:\nСпел, и смело на постель.\nКак меня ты поимела,\nПока он тебя имел.\n\nПр.\nИ как всегда, я буду как тогда:\nВоспоминания, боль, и слов на пол листа.\nОставить видимо что-то на память.\nНу а потом привезешь.\nМожет чего-то поймешь. \n\nЧерт с тобой! Сегодня ночью\nЯ разбавлю и вперёд!\nХод простой, и очень точно\nНи к чему не приведёт. Прости. \n\nИ всего-то на двоих нам \nСолнце, море, и песок.\nСтолько лет в руках твоих как \nЗапасное колесо.\n\nПр.\nИ как всегда я буду как тогда Воспоминания, боль, и слов на пол листа \nОставить видимо что-то на память.\nНу а потом привезешь.\nМожет чего-то поймешь\nМожет быть что-то поймешь \nВедь я блин такой, как ты ждешь!"}, {"n": 7, "title": "Невеста", "src": "audio/07.mp3", "cover": "img/t07.jpg", "dur": 212, "lyrics": "Бьёт по лицу в сырых тонах улицы.\nИ кто-то сильный большой\nЗаменит наш - твой и мой на другой. \n\nВслушиваюсь. Опять чего-то боюсь.\nОпять за что-то борюсь. \nЯ как всегда растворюсь, но вернусь.\n\nТам за стеклом погасишь свет. А потом..\nЯ снова спал за углом. \nЯ снова ждал… Но потом, всё потом. \n\nПр.\nТак необыкновенно \nЯ здесь в твоей Вселенной\nСобрав себя из пустоты.\nВтроём здесь слишком тесно\nМне не хватило места.\nВедь не моя невеста ты.\n\nСмелых идей все меньше, чем у людей\nМне до скончания дней придётся ждать. \nНо не дождать новостей. \n\nЛучше бы нет, но я узнал твой секрет.\nМне не досталось побед.\nТеперь осталось лишь то, где нас нет. \n\n Пр.\nТак необыкновенно \nЯ здесь в твоей Вселенной\nСобрал себя из пустоты.\nВтроём здесь слишком тесно\nМне не хватило места.\nВедь не моя невеста ты.\n\nВедь не моя невеста ты\nВедь не моя невеста ты."}, {"n": 8, "title": "Весна", "src": "audio/08.mp3", "cover": "img/t08.jpg", "dur": 213, "lyrics": "Утром нас с тобой поймают, и не ной.\nЗдравствуй новый день напрасный.\nМаленьких побед не будет больше, нет.\nПусто на душе. Опасно.\n\nБудто бы назло опять не повезло.\nМило, но мало повсюду.\nВоздух на обед. Забился в угол свет.\nПередал привет оттуда. \n\nПр.\nВесна, любовь, надежда.\nИ с вами я и между.\nОткрой своей рукой мой воздух.\nИ я с тобой пока еще не поздно.\n\nЯвишься во сне как солнце по весне. \nВот она любовь зануда.\nВот и всё конец. Ни свадьбы, ни колец.\nБыл такой подлец - и буду. \n\nПр.\nВесна, любовь, надежда.\nИ с вами я и между.\nОткрой своей рукой мой воздух.\nИ я с тобой пока еще не поздно."}, {"n": 9, "title": "До утра", "src": "audio/09.mp3", "cover": "img/t09.jpg", "dur": 155, "lyrics": "Из последних сил \nЯ до конца тебя искал.\nЯ без конца тебя просил, \nИ без успеха тебя ждал. \n\nРаз и больше нет. \nТут нет ничего. И этих миль.\nИ никого, кто нёс мне свет, \nНо не донёс. Теперь я слеп. \n\nПр.\nСнова вдвоём просидели с тобой до утра. \nОдно лишь слово металось и билось, как моль у ковра.\nОстановилось. Повисло, упало, погибло в пути.\nНе получилось. \n\nГод. Из года в год. \nИзо дня в день топить твой лёд.\nИли взорвать. \nНо набекрень всё так и идёт.\n\nС горем пополам нам напополам \nС тобой такой город.\nНо в нём упорот днём я.\nНочью во мне упорот он. \n\nПр.\nСнова вдвоем просидели с тобой до утра.\nОдно лишь слово металось и билось. \nИ наша искра уж отыскрилась,\nЗабила, сбежала куда-то с другим.\nНо оступилась. \n\nВзгляд во тьму опять. \nМне одному тебя искать\nЛишь потому, что снова ждать.\nЛишь потому, что это знать.\n\nЕсли бы не ты, то я бы не я.\nИ с высоты \nПолета моей мечты смотри, \nКак все ещё тут я жду тебя! \n\nПр.\nВсе же опять просидели с тобой до утра.\nОдно и тоже. Улыбки и песни. Лишь город Петра\nНас перепутал\nСбивая с пути незнакомый состав.\nНо все окутал на свой риск и страх."}, {"n": 10, "title": "Пусть так", "src": "audio/10.mp3", "cover": "img/t10.jpg", "dur": 152, "lyrics": "Ты прости но может я не тот.\nТы прости, но я наоборот.\nНе сидеть нам больше у ворот. \nМоё сердце словно пулемет.\n\nЛасковые ласковые дни.\nНе заметишь, как уйдут они.\nНе заметишь, как сгорят они.\nТолько ничего не пророни!\n\nПр.\nПусть пусть так, не надо драк.\nНе надо! Не надо! \nНа двоих нам слез твоих\nНе надо! Не надо!\n\nБудет снова просто и легко.\nТолько улети не высоко,\nТолько упади не глубоко.\nПосмотри - я здесь не далеко!\n\nКапли капли яда в молоке-\nЯ тебе на этом языке\nРасскажу, как снова налегке!\nКак твоя рука в моей руке! \n\nПр.\nПусть пусть так, не надо драк.\nНе надо! Не надо! \nНа двоих нам слез твоих\nНе надо! Не надо!"}, {"n": 11, "title": "ILU", "src": "audio/11.mp3", "cover": "img/t11.jpg", "dur": 163, "lyrics": "Снова волнами выше и ниже\nСудьбами кто-то играет бестыже. \nЛижут слова, колют они же.\nБудто конец ближе и ближе.\n\nВроде бы - вот! Но мы, как рельсы\nБудто бы рядом, но все же не вместе.\nМожет быть просто, может от лести\nСнова по трассе горим за двести!\n\nПр.\n\nТак мать твою, опять в ничью.\nПлевать, спою! Ведь I love you!\n\nКаждый лишён полового сношения.\nКаждый живёт с прибором слежения.\nЖажда убьёт, или в целом лишения?\nДумать, когда принимаем решения.\n\nЮбочка в клеточку против старения.\nДавит на мозг закон притяжения.\nКто я такой чтобы жаждить общения?\nИ вот наконец точка невозвращения! \n\nПр.\n\nТак мать твою, опять в ничью.\nПлевать, спою! Ведь I love you!"}, {"n": 12, "title": "Ракеты", "src": "audio/12.mp3", "cover": "img/t12.jpg", "dur": 155, "lyrics": "Я знаю, это может быть \nС тобой, и может быть со мной.\nО ком скучать, кого любить\nНапомнит может голос твой.\n\nСегодня сбудется \nУ тех, кто влюбится.\nА кто не влюбится - потом.\n\nИ может быть еще вчера \nМы были может быть на ты.\nНо видимо уже пора\nИграть по правилам игры.\n\nСердца сжимаются. \nИ прижимаются \nДруг другу наши корабли. \n\nПр. \nПрости, ну где ты? Больше нет войны.\nСожжены ракеты. И мы за это должны.\n\nБыть может несколько минут\nТебя спасают от меня.\nКатегорически не ждут \nТвои мобильные звеня.\n\nНу кто там ломится.\nВсе кто-то гонится.\nВсе переломится, и я.\n\nПр. \nПрости, ну где ты? Больше нет войны.\nСожжены ракеты. И мы да это должны"}, {"n": 13, "title": "Снегом", "src": "audio/13.mp3", "cover": "img/t13.jpg", "dur": 175, "lyrics": "Мои мечты растают следом.\nМои следы уходят в небо.\nУносят в небо твои тонкие черты.\n\nЛето, снова лето, \nИ я опять кричу об этом.\nА ты опять молчишь об этом,\nНо если нету, значит нету. Значит нет.\n\nПр.\n\nВижу тебя. Я знаю тебя, хотя..\nТочки стоят. А впрочем, как хочешь.\nДостаточно точен твой взгляд.\n\nСдуться, и загнуться. \nМои колени не трясутся.\nТы обещала не вернуться.\nНо постарайся не запнуться, не забудь.\n\nСтоп. На горизонте \nМои надежды урезоньте. \nМои идеи на ремонте.\nПо обе стороны вот только ты и я. \n\nПр.\n\nВижу тебя. Я знаю тебя, хотя..\nТочки стоят. А впрочем, как хочешь.\nДостаточно точен твой взгляд."}, {"n": 14, "title": "Ловушки", "src": "audio/14.mp3", "cover": "img/t14.jpg", "dur": 201, "lyrics": "1.\nГлянцевый мир перед тобой,\nДруг сегодня один - завтра другой.\nОтносительно всех, ты восхитительней многих.\n\nНе признаёшь серые стены.\nСердце твоё ждёт перемены. \nОтыщешь его, перезагрузишь, и в бой!\n\nПр.\nРаз, два, три. Тише и тише.\nСмотри - он ещё дышит.\nРасставишь свои ловушки,\nРаздаришь за безделушки себя.\n\n2.\nПраздничный блюз. В вазе цветы.\nУдивительный плюс твоей красоты.\nОтмеряешь на глаз, где допустимы границы.\n\nЗапоминай песни мотив, \nТолько не растеряй свой позитив.\nОставляй на потом - может еще пригодится. \n\nПр.\nРаз, два, три. Тише и тише.\nСмотри, он ещё дышит.\nРасставишь свои ловушки,\nРаздаришь за безделушки себя."}, {"n": 15, "title": "Сол", "src": "audio/15.mp3", "cover": "img/t15.jpg", "dur": 222, "lyrics": "А он отличный мужик, \nОбворожи или приворожи.  \nНо он как сможет сбежать-так сбежит.\nПотом кастрюли, тарелки, ножи\n\nИ ведь не первый раз, детка, скажи? \nДа, в голове тараканы, ужи…\nПотом стаканы и в ленте кринжи.\nПосты с Хайямом к хуям не пиши.\n\nА я по ямам до нашей глуши, \nПока курю, шеф, мотор не глуши.\nКак папа, мама, сестра, племяши?\nС дедом Вспомнили бабушку, её беляши\n\nА ты дела, если есть, отложи \nТы родила, да у меня малыши \nКогда ждала ты, а я не решил\nТогда лопатой все раны зашил.\n\nПр.\nА you my heart, you my soul, \nА я бухал, вот рассол \nИ я конечно не Гудман Сол \nНо кое че все же тоже учел \n\nЛюбовь зла и добра \nА я упал ниже низа \nНо это было вчера \nСегодня кончилась виза \n\n\nВ общем, опять апатия, ебать её.\nА я снова забыл, как звать её.\nИ завыл, тебя увидев в свадебном платиИ.\nУшла мечта, а я всё пытался догнать её.\n\nВроде сделали птенцов, осели в гнёздах.\nНо иногда, все реже, обычно ночью поздно.\nПодумаю, чем никогда, может лучше поздно?\nВ погоне за журавлём -ты моя муза, доза, воздух. \n\nМоя Звезда, прости, тогда я путал звезды.\nПрошли года, как никогда я понял мозгом.\nЧем без тебя, лучше в огне, или горячем воске.\nЧем без тебя, лучше в земле закалоченный досками.\n\nТоска жестка. Как стекла осколками \nОстрыми рвет душу и вены. Раз в сколько там? \nТолько вспомню иногда, уж по сколько нам.\nСкинул в чат. Прощай. Больно уж больно, на."}, {"n": 16, "title": "Моя звезда", "src": "audio/16.mp3", "cover": "img/t16.jpg", "dur": 232, "lyrics": "Пой мне об этом.\nБоль для поэта. \nСколько сюжетов -\nСтолько умрёт.\n\nЗлиться не буду.\nТы в лицах по всюду.\nЛюди забудут.\nЛюди поймут.\n\nПр.\nЧто мы рассоримся навсегда.\nТеперь или никогда отправимся в никуда. \nИ не сбудутся все мечты.\nЯ буду с тобой на ты,\nТы ведь моя звезда!\n\nВзрослые дети\nСсоримся в цвете\nМожет быть этим живём?\n\nГде -то под солнцем \nТы улыбнёшься,\nТихо проснешься,\nВспомнишь, как я, ты… \n\nПр.\nЧто мы рассоримся навсегда.\nТеперь или никогда отправимся в никуда. \nИ не сбудутся все мечты.\nЯ буду с тобой на ты,\nТы ведь моя звезда!"}, {"n": 17, "title": "Где-то", "year": "", "src": "audio/e1.mp3", "cover": "img/album1.jpg", "dur": 246, "lyrics": "", "link": "", "date": ""}]}, {"id": "singles", "title": "Синглы", "kind": "Синглы", "year": "2020", "cover": "", "note": "Первые релизы группы на площадках.", "credits": ["Музыка и слова — Рома Спасский"], "tracks": [{"n": 1, "title": "Ничья вина", "year": "2020", "src": "audio/e2.mp3", "cover": "img/estervill_single_nichya_vina.jpg", "dur": 237, "lyrics": "", "link": "https://music.apple.com/ru/album/%D0%BD%D0%B8%D1%87%D1%8C%D1%8F-%D0%B2%D0%B8%D0%BD%D0%B0-single/1520134975", "date": "16 июня 2020"}, {"n": 2, "title": "Вьются", "year": "2020", "src": "", "cover": "img/estervill_single_vyutsya.jpg", "dur": 166, "lyrics": "", "link": "https://music.apple.com/ru/album/%D0%B2%D1%8C%D1%8E%D1%82%D1%81%D1%8F-single/1542487957", "date": "24 ноября 2020"}, {"n": 3, "title": "Эзотерика", "year": "2020", "src": "", "cover": "img/estervill_single_ezoterika.jpg", "dur": 201, "lyrics": "", "link": "https://music.apple.com/ru/album/%D1%8D%D0%B7%D0%BE%D1%82%D0%B5%D1%80%D0%B8%D0%BA%D0%B0-single/1545295993", "date": "12 декабря 2020"}]}]};
+const DATA = {"albums": [{"id": "a", "title": "На расстоянии голоса", "year": "2026", "note": "Песни о людях, которых разделяет расстояние, и о голосе, который всё ещё держит связь.", "cover": "img/al/a.jpg", "bg": "img/al/a_bg.jpg", "tracks": [{"title": "Где-то", "src": "audio/a01.mp3", "dur": 204, "cover": "img/tr/a01.jpg", "lyrics": ""}, {"title": "Возле", "src": "audio/a02.mp3", "dur": 200, "cover": "img/tr/a02.jpg", "lyrics": "1.Глухо на проводе, я на том проводе, \nЛето уж проводы. Может быть поводом \n\nМожет быть неводом, может быть рыбой,\nА может быть все это было не здесь\n\nИли, как водится кто-то заводится,\nКто-то разводится, кто-то в раю в Ницце. \n\nНо не потея за эти маразмы же \nМы же с тобой независимый весь!\n\nПР. Стой, я поведу, я понесу, и не уйду.\nЯ по другому не могу…\n\nСтой, выключи свет, \nНе забывай наших побед.\n\nНе улетай. Маме привет. Только скажи: до свидания.\n\n2.Жести добавишь ли? Вроде года-то шли.\nВроде куда-то шли, в моде опять дожди.\n\nСны и паребрики, возле Москва-реки,\nВозле твоей руки вот бы мою!\n \nРобко на таймере мир остановлен. \nВо сколько? Давай удиви. Ноу проблем.\n\nЯ возле, я рядом, я здесь, я обычный же.\nПросто, как раньше тихонечко пни…\n\nМы это то, что однажды закончится.\nЗнаем и видели. Колется, хочется. \n\nМожет сегодня иначе подпрыгивать?\nМожет сегодня побуду собой. \n\nПР. Стой, я поведу, я понесу, и не уйду.\nЯ по другому не могу…\n\nСтой, выключи свет, \nНе забывай наших побед.\n\nНе убегай. Маме привет. Только скажи: до свидания."}, {"title": "Ракеты", "src": "audio/a03.mp3", "dur": 142, "cover": "img/tr/a03.jpg", "lyrics": "Я знаю, это может быть \nС тобой, и может быть со мной.\nО ком скучать, кого любить\nНапомнит может голос твой.\n\nСегодня сбудется \nУ тех, кто влюбится.\nА кто не влюбится - потом.\n\nИ может быть еще вчера \nМы были может быть на ты.\nНо видимо уже пора\nИграть по правилам игры.\n\nСердца сжимаются. \nИ прижимаются \nДруг другу наши корабли. \n\nПр. \nПрости, ну где ты? Больше нет войны.\nСожжены ракеты. И мы за это должны.\n\nБыть может несколько минут\nТебя спасают от меня.\nКатегорически не ждут \nТвои мобильные звеня.\n\nНу кто там ломится.\nВсе кто-то гонится.\nВсе переломится, и я.\n\nПр. \nПрости, ну где ты? Больше нет войны.\nСожжены ракеты. И мы да это должны"}, {"title": "ILU", "src": "audio/a04.mp3", "dur": 156, "cover": "img/tr/a04.jpg", "lyrics": "Снова волнами выше и ниже\nСудьбами кто-то играет бестыже. \nЛижут слова, колют они же.\nБудто конец ближе и ближе.\n\nВроде бы - вот! Но мы, как рельсы\nБудто бы рядом, но все же не вместе.\nМожет быть просто, может от лести\nСнова по трассе горим за двести!\n\nПр.\n\nТак мать твою, опять в ничью.\nПлевать, спою! Ведь I love you!\n\nКаждый лишён полового сношения.\nКаждый живёт с прибором слежения.\nЖажда убьёт, или в целом лишения?\nДумать, когда принимаем решения.\n\nЮбочка в клеточку против старения.\nДавит на мозг закон притяжения.\nКто я такой чтобы жаждить общения?\nИ вот наконец точка невозвращения! \n\nПр.\n\nТак мать твою, опять в ничью.\nПлевать, спою! Ведь I love you!"}, {"title": "Снегом", "src": "audio/a05.mp3", "dur": 162, "cover": "img/tr/a05.jpg", "lyrics": "Мои мечты растают следом.\nМои следы уходят в небо.\nУносят в небо твои тонкие черты.\n\nЛето, снова лето, \nИ я опять кричу об этом.\nА ты опять молчишь об этом,\nНо если нету, значит нету. Значит нет.\n\nПр.\n\nВижу тебя. Я знаю тебя, хотя..\nТочки стоят. А впрочем, как хочешь.\nДостаточно точен твой взгляд.\n\nСдуться, и загнуться. \nМои колени не трясутся.\nТы обещала не вернуться.\nНо постарайся не запнуться, не забудь.\n\nСтоп. На горизонте \nМои надежды урезоньте. \nМои идеи на ремонте.\nПо обе стороны вот только ты и я. \n\nПр.\n\nВижу тебя. Я знаю тебя, хотя..\nТочки стоят. А впрочем, как хочешь.\nДостаточно точен твой взгляд."}, {"title": "Пусть так", "src": "audio/a06.mp3", "dur": 175, "cover": "img/tr/a06.jpg", "lyrics": "Ты прости но может я не тот.\nТы прости, но я наоборот.\nНе сидеть нам больше у ворот. \nМоё сердце словно пулемет.\n\nЛасковые ласковые дни.\nНе заметишь, как уйдут они.\nНе заметишь, как сгорят они.\nТолько ничего не пророни!\n\nПр.\nПусть пусть так, не надо драк.\nНе надо! Не надо! \nНа двоих нам слез твоих\nНе надо! Не надо!\n\nБудет снова просто и легко.\nТолько улети не высоко,\nТолько упади не глубоко.\nПосмотри - я здесь не далеко!\n\nКапли капли яда в молоке-\nЯ тебе на этом языке\nРасскажу, как снова налегке!\nКак твоя рука в моей руке! \n\nПр.\nПусть пусть так, не надо драк.\nНе надо! Не надо! \nНа двоих нам слез твоих\nНе надо! Не надо!"}, {"title": "Моя звезда", "src": "audio/a07.mp3", "dur": 227, "cover": "img/tr/a07.jpg", "lyrics": "Пой мне об этом.\nБоль для поэта. \nСколько сюжетов -\nСтолько умрёт.\n\nЗлиться не буду.\nТы в лицах по всюду.\nЛюди забудут.\nЛюди поймут.\n\nПр.\nЧто мы рассоримся навсегда.\nТеперь или никогда отправимся в никуда. \nИ не сбудутся все мечты.\nЯ буду с тобой на ты,\nТы ведь моя звезда!\n\nВзрослые дети\nСсоримся в цвете\nМожет быть этим живём?\n\nГде -то под солнцем \nТы улыбнёшься,\nТихо проснешься,\nВспомнишь, как я, ты… \n\nПр.\nЧто мы рассоримся навсегда.\nТеперь или никогда отправимся в никуда. \nИ не сбудутся все мечты.\nЯ буду с тобой на ты,\nТы ведь моя звезда!"}]}, {"id": "b", "title": "Цепляешься за новое", "year": "2026", "note": "Весна, роботы, кометы и упрямая попытка начать заново — от лета к лету.", "cover": "img/al/b.jpg", "bg": "img/al/b_bg.jpg", "tracks": [{"title": "Весна", "src": "audio/b01.mp3", "dur": 196, "cover": null, "lyrics": "Утром нас с тобой поймают, и не ной.\nЗдравствуй новый день напрасный.\nМаленьких побед не будет больше, нет.\nПусто на душе. Опасно.\n\nБудто бы назло опять не повезло.\nМило, но мало повсюду.\nВоздух на обед. Забился в угол свет.\nПередал привет оттуда. \n\nПр.\nВесна, любовь, надежда.\nИ с вами я и между.\nОткрой своей рукой мой воздух.\nИ я с тобой пока еще не поздно.\n\nЯвишься во сне как солнце по весне. \nВот она любовь зануда.\nВот и всё конец. Ни свадьбы, ни колец.\nБыл такой подлец - и буду. \n\nПр.\nВесна, любовь, надежда.\nИ с вами я и между.\nОткрой своей рукой мой воздух.\nИ я с тобой пока еще не поздно."}, {"title": "Цепляешься за новое", "src": "audio/b02.mp3", "dur": 245, "cover": null, "lyrics": "В самолет. Тебя так далеко никто не повезёт.\nТам время замерзает-так что подождет. \nОпять декабрь - и десять раз, как ровно год. \n\nИ ползет твой мир нелепый то назад, а то вперед. \nОт лета к лету, но внутри поэт поёт. \nИ как ни просишь Бога - все равно поёт. \n\nПр. \nЦепляешься за новое. \nТебя почти слепого и\nГлухого на мели помяли. \nИз петли достали. \nТолько не пыли. \nМы знать не знали-не были. \nВ вино слезами. Могли бы сами…\n\nВсе вены забинтованы. \nВсе переименованы контакты. \nИ в сети хоть как ты не свети-тобой разочарованы. \n\nПеред сном наивно, но опять попросишь об одном.\nКоторый раз пойдёшь курить перед окном.\nИ день за днём, за годом год - всё об одном.\nА потом Вселенная ругается, и бьёт ключом. \nНикак не получается к плечу плечом.\nПора уже отчаяться-я вот о чем."}, {"title": "Роботы", "src": "audio/b03.mp3", "dur": 185, "cover": null, "lyrics": "1.\nМои идеально детали подходят к твоим.\nМы врозь моментально находим того с кем не спим.\n\nВ итоге ментальным искусственным кодом машин\nМы вычислены, и мы вычленены из руин.\n\nВсе винтики, гаечки, шильдики, \nТок, провода. \nКолечки, сердечки, цепочки, тату навсегда. \n\nПо венам течёт то ли нет, то ли все-таки кровь.\nТы копии наши с тобой сохрани, приготовь. \n\nПр.\nРоботы мы оба. Ты и я.\nВ любовь до гроба,\nПоиграли мы немного\nИ адью.\n\nСитуация убога,\nПопрошу еще у Бога.\nВ код твой может \nКак-нибудь себя залью.\n\n2.\nТвоя батарея заряжена больше моей. \nЧуть выше, левее, стучит? Значит я ещё с ней.\n\nМеханика краника тоже бывают сбоИ.\nНо мы в симуляции-вот симулируй, ори!\n\nСотри все штрихкоды, серийники тоже замажь.\nСмотри-пешеходы кругом, и у каждого стаж.\n\nУ каждого сейвы свои и наборы программ.\nЯ наши с тобой никому никогда не отдам. \n\nПр.\nРоботы мы оба. Ты и я.\nВ любовь до гроба \nПоиграли мы немного,\nИ адью.\n\nСитуация убога,\nПопрошу еще у Бога.\nВ код твой может \nСам себя перезалью."}, {"title": "Ловушки", "src": "audio/b04.mp3", "dur": 178, "cover": null, "lyrics": "1.\nГлянцевый мир перед тобой,\nДруг сегодня один - завтра другой.\nОтносительно всех, ты восхитительней многих.\n\nНе признаёшь серые стены.\nСердце твоё ждёт перемены. \nОтыщешь его, перезагрузишь, и в бой!\n\nПр.\nРаз, два, три. Тише и тише.\nСмотри - он ещё дышит.\nРасставишь свои ловушки,\nРаздаришь за безделушки себя.\n\n2.\nПраздничный блюз. В вазе цветы.\nУдивительный плюс твоей красоты.\nОтмеряешь на глаз, где допустимы границы.\n\nЗапоминай песни мотив, \nТолько не растеряй свой позитив.\nОставляй на потом - может еще пригодится. \n\nПр.\nРаз, два, три. Тише и тише.\nСмотри, он ещё дышит.\nРасставишь свои ловушки,\nРаздаришь за безделушки себя."}, {"title": "Привет", "src": "audio/b05.mp3", "dur": 142, "cover": null, "lyrics": ""}, {"title": "Комета", "src": "audio/b06.mp3", "dur": 212, "cover": null, "lyrics": ""}, {"title": "Ничья вина", "src": "audio/b07.mp3", "dur": 228, "cover": null, "lyrics": ""}]}, {"id": "c", "title": "4 звука до утра", "year": "2026", "note": "Кухонные песни: вино, ночные разговоры, мосты, которые тают, и рассвет за окном.", "cover": "img/al/c.jpg", "bg": "img/al/c_bg.jpg", "tracks": [{"title": "4 звука", "src": "audio/c01.mp3", "dur": 265, "cover": null, "lyrics": "Вот теперь молчи и слушай \nРастворяя боль в вине.\nВ голове четыре звука,\nПосижу наедине с тобой.\n\nИ плевать. Такое дело:\nСпел, и смело на постель.\nКак меня ты поимела,\nПока он тебя имел.\n\nПр.\nИ как всегда, я буду как тогда:\nВоспоминания, боль, и слов на пол листа.\nОставить видимо что-то на память.\nНу а потом привезешь.\nМожет чего-то поймешь. \n\nЧерт с тобой! Сегодня ночью\nЯ разбавлю и вперёд!\nХод простой, и очень точно\nНи к чему не приведёт. Прости. \n\nИ всего-то на двоих нам \nСолнце, море, и песок.\nСтолько лет в руках твоих как \nЗапасное колесо.\n\nПр.\nИ как всегда я буду как тогда Воспоминания, боль, и слов на пол листа \nОставить видимо что-то на память.\nНу а потом привезешь.\nМожет чего-то поймешь\nМожет быть что-то поймешь \nВедь я блин такой, как ты ждешь!"}, {"title": "Невеста", "src": "audio/c02.mp3", "dur": 222, "cover": null, "lyrics": "Бьёт по лицу в сырых тонах улицы.\nИ кто-то сильный большой\nЗаменит наш - твой и мой на другой. \n\nВслушиваюсь. Опять чего-то боюсь.\nОпять за что-то борюсь. \nЯ как всегда растворюсь, но вернусь.\n\nТам за стеклом погасишь свет. А потом..\nЯ снова спал за углом. \nЯ снова ждал… Но потом, всё потом. \n\nПр.\nТак необыкновенно \nЯ здесь в твоей Вселенной\nСобрав себя из пустоты.\nВтроём здесь слишком тесно\nМне не хватило места.\nВедь не моя невеста ты.\n\nСмелых идей все меньше, чем у людей\nМне до скончания дней придётся ждать. \nНо не дождать новостей. \n\nЛучше бы нет, но я узнал твой секрет.\nМне не досталось побед.\nТеперь осталось лишь то, где нас нет. \n\n Пр.\nТак необыкновенно \nЯ здесь в твоей Вселенной\nСобрал себя из пустоты.\nВтроём здесь слишком тесно\nМне не хватило места.\nВедь не моя невеста ты.\n\nВедь не моя невеста ты\nВедь не моя невеста ты."}, {"title": "Кроет", "src": "audio/c03.mp3", "dur": 210, "cover": null, "lyrics": "Вдруг, смотри, как обычно стучит. \nТот стук, возможно тебя тяготит? \n\nКрик, как прежде увидел покой. \nВозник. И снова все зря. Боже мой.\n\nПр.\n\nКроет. Увезли под конвоем! \nОт тебя меня кроет. \nТы летишь, а я вою, ною…\n\nНо я, если сдохну то стоя,\nЕсли сдамся, то for you.\nЯ не лопну, укрою.\nК бою!\n\n2.\nОк. Оставим дела на потом. \nЯ смог. Ведь я твой листок-ты мой дом. \n\nНо, теперь по другому нельзя. \nКак жаль. \nТеперь не враги, не друзья. \n\nПр.\n\nКроет. Увезли под конвоем! \nОт тебя меня кроет. \nТы летишь, а я вою, ною…\n\nНо я, если сдохну - то стоя\nЕсли сдамся, то for you.\nЯ не лопну, укрою. \nК бою!"}, {"title": "Сол", "src": "audio/c04.mp3", "dur": 208, "cover": null, "lyrics": "А он отличный мужик, \nОбворожи или приворожи.  \nНо он как сможет сбежать-так сбежит.\nПотом кастрюли, тарелки, ножи\n\nИ ведь не первый раз, детка, скажи? \nДа, в голове тараканы, ужи…\nПотом стаканы и в ленте кринжи.\nПосты с Хайямом к хуям не пиши.\n\nА я по ямам до нашей глуши, \nПока курю, шеф, мотор не глуши.\nКак папа, мама, сестра, племяши?\nС дедом Вспомнили бабушку, её беляши\n\nА ты дела, если есть, отложи \nТы родила, да у меня малыши \nКогда ждала ты, а я не решил\nТогда лопатой все раны зашил.\n\nПр.\nА you my heart, you my soul, \nА я бухал, вот рассол \nИ я конечно не Гудман Сол \nНо кое че все же тоже учел \n\nЛюбовь зла и добра \nА я упал ниже низа \nНо это было вчера \nСегодня кончилась виза \n\n\nВ общем, опять апатия, ебать её.\nА я снова забыл, как звать её.\nИ завыл, тебя увидев в свадебном платиИ.\nУшла мечта, а я всё пытался догнать её.\n\nВроде сделали птенцов, осели в гнёздах.\nНо иногда, все реже, обычно ночью поздно.\nПодумаю, чем никогда, может лучше поздно?\nВ погоне за журавлём -ты моя муза, доза, воздух. \n\nМоя Звезда, прости, тогда я путал звезды.\nПрошли года, как никогда я понял мозгом.\nЧем без тебя, лучше в огне, или горячем воске.\nЧем без тебя, лучше в земле закалоченный досками.\n\nТоска жестка. Как стекла осколками \nОстрыми рвет душу и вены. Раз в сколько там? \nТолько вспомню иногда, уж по сколько нам.\nСкинул в чат. Прощай. Больно уж больно, на."}, {"title": "Оставляю", "src": "audio/c05.mp3", "dur": 234, "cover": null, "lyrics": "Вот оно как происходит, \nПросто проходит и пройдёт.\nИщет нас, но не находит. \nЗначит кого-то ещё найдёт.\n\nМожет забудет когда-то,\nМожет не будет больше ждать.\nМожет и мы от утраты \nСможем куда-то убежать.\n\nПр.\n\nЯ таю\nИ мосты \nИ ты. Скучаю \nИ мечты \n\nОставляю\nВам двоим \nНе спим\nМолчим\n\n2.\nИ не помеха погода \nДо лета пол года, ну и пусть.\nВ поисках нового года \nДавиться свободой, но дождусь.\n\nМожет быть вспомнишь об этом,\nНо не приветов, и не звонков.\nНовые ваши сюжеты. \nСекреты придуманных врагов."}, {"title": "До утра", "src": "audio/c06.mp3", "dur": 187, "cover": null, "lyrics": "Из последних сил \nЯ до конца тебя искал.\nЯ без конца тебя просил, \nИ без успеха тебя ждал. \n\nРаз и больше нет. \nТут нет ничего. И этих миль.\nИ никого, кто нёс мне свет, \nНо не донёс. Теперь я слеп. \n\nПр.\nСнова вдвоём просидели с тобой до утра. \nОдно лишь слово металось и билось, как моль у ковра.\nОстановилось. Повисло, упало, погибло в пути.\nНе получилось. \n\nГод. Из года в год. \nИзо дня в день топить твой лёд.\nИли взорвать. \nНо набекрень всё так и идёт.\n\nС горем пополам нам напополам \nС тобой такой город.\nНо в нём упорот днём я.\nНочью во мне упорот он. \n\nПр.\nСнова вдвоем просидели с тобой до утра.\nОдно лишь слово металось и билось. \nИ наша искра уж отыскрилась,\nЗабила, сбежала куда-то с другим.\nНо оступилась. \n\nВзгляд во тьму опять. \nМне одному тебя искать\nЛишь потому, что снова ждать.\nЛишь потому, что это знать.\n\nЕсли бы не ты, то я бы не я.\nИ с высоты \nПолета моей мечты смотри, \nКак все ещё тут я жду тебя! \n\nПр.\nВсе же опять просидели с тобой до утра.\nОдно и тоже. Улыбки и песни. Лишь город Петра\nНас перепутал\nСбивая с пути незнакомый состав.\nНо все окутал на свой риск и страх."}]}], "singles": [{"n": 1, "title": "Ничья вина", "year": "2020", "src": "audio/e2.mp3", "cover": "img/estervill_single_nichya_vina.jpg", "dur": 237, "link": "https://music.apple.com/ru/album/%D0%BD%D0%B8%D1%87%D1%8C%D1%8F-%D0%B2%D0%B8%D0%BD%D0%B0-single/1520134975", "date": "16 июня 2020"}, {"n": 2, "title": "Вьются", "year": "2020", "src": "", "cover": "img/estervill_single_vyutsya.jpg", "dur": 166, "link": "https://music.apple.com/ru/album/%D0%B2%D1%8C%D1%8E%D1%82%D1%81%D1%8F-single/1542487957", "date": "24 ноября 2020"}, {"n": 3, "title": "Эзотерика", "year": "2020", "src": "", "cover": "img/estervill_single_ezoterika.jpg", "dur": 201, "link": "https://music.apple.com/ru/album/%D1%8D%D0%B7%D0%BE%D1%82%D0%B5%D1%80%D0%B8%D0%BA%D0%B0-single/1545295993", "date": "12 декабря 2020"}]};
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const fmt = s => { s = Math.max(0, Math.round(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const PLAY = '<path d="M7 4l13 8-13 8z"/>', PAUSE = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
-const A = DATA.albums[0], S = DATA.albums[1];
-const audio = $('#audio');
-let list = A.tracks, idx = -1;
+const AL = DATA.albums, SG = DATA.singles, audio = $('#audio');
+AL.forEach(a => a.tracks.forEach(t => { t.album = a; t.img = t.cover || a.cover; }));
+SG.forEach(t => t.img = t.cover);
+let list = null, idx = -1, cur = 0;
+const mins = a => Math.round(a.tracks.reduce((s,t)=>s+t.dur,0)/60);
+const two = n => String(n).padStart(2,'0');
 
-// Альбом: треклист
-$('#aNote').textContent = A.note;
-$('#aCount').textContent = A.tracks.length + ' · ' + Math.round(A.tracks.reduce((s,t)=>s+t.dur,0)/60) + ' мин';
-$('#tracks').innerHTML = A.tracks.map((t,i) =>
-  '<li class="tr" data-i="'+i+'"><div class="trh"><span class="n">'+String(i+1).padStart(2,'0')+'</span>'+
-  '<button class="t" type="button" data-play="'+i+'">'+esc(t.title)+'</button><span class="d">'+fmt(t.dur)+'</span>'+
-  (t.lyrics ? '<button class="x" type="button" data-ly="'+i+'" aria-expanded="false">Текст</button>' : '<span class="x" aria-hidden="true"></span>')+'</div>'+
-  (t.lyrics ? '<div class="lyr" id="ly'+i+'" hidden><span></span><img src="'+t.cover+'" alt=""><pre>'+esc(t.lyrics)+'</pre></div>' : '')+'</li>').join('');
-$$('[data-play]').forEach(b => b.onclick = () => toggleOrPlay(A.tracks, +b.dataset.play));
-$$('[data-ly]').forEach(b => b.onclick = () => { const el = $('#ly'+b.dataset.ly); el.hidden = !el.hidden; b.setAttribute('aria-expanded', String(!el.hidden)); b.textContent = el.hidden ? 'Текст' : 'Скрыть'; });
+// Слайдер альбомов
+$('#slides').innerHTML = AL.map((a,i) =>
+  '<section class="slide" data-k="'+i+'" aria-roledescription="слайд" aria-label="'+(i+1)+' из '+AL.length+'">'+
+  '<img class="bg" src="'+a.bg+'" alt="" '+(i?'loading="lazy"':'')+'>'+
+  '<div class="wrap in"><div class="txt">'+
+  '<div class="meta"><span class="label">Альбом · '+a.year+'</span><span class="label">'+a.tracks.length+' треков · '+mins(a)+' мин</span></div>'+
+  (i?'<h2>':'<h1>')+esc(a.title)+(i?'</h2>':'</h1>')+'<p>'+esc(a.note)+'</p>'+
+  '<div class="acts"><button class="pbtn solid" type="button" data-hp="'+i+'"><svg viewBox="0 0 24 24">'+PLAY+'</svg><span>Слушать</span></button>'+
+  '<a class="pbtn" href="#album" data-ht="'+i+'">Треклист</a></div></div>'+
+  '<div class="sleeve"><img src="'+a.cover+'" alt="Обложка альбома «'+esc(a.title)+'»"></div></div></section>').join('');
+$('#sTabs').innerHTML = AL.map((a,i) => '<button type="button" role="tab" data-st="'+i+'">'+esc(a.title)+'</button>').join('');
+function go(i){
+  cur = (i + AL.length) % AL.length;
+  $$('.slide').forEach(s => s.classList.toggle('on', +s.dataset.k === cur));
+  $$('[data-st]').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.st === cur)));
+  $('#sCount').textContent = two(cur+1)+' / '+two(AL.length);
+  $('#prog').style.width = ((cur+1)/AL.length*100)+'%';
+  showAlbum(cur);
+}
+$('#sPrev').onclick = () => go(cur-1); $('#sNext').onclick = () => go(cur+1);
+$$('[data-st]').forEach(b => b.onclick = () => go(+b.dataset.st));
+$$('[data-hp]').forEach(b => b.onclick = () => { const a = AL[+b.dataset.hp]; toggleOrPlay(a.tracks, list === a.tracks && idx >= 0 ? idx : 0); });
+$$('[data-ht]').forEach(b => b.onclick = () => showAlbum(+b.dataset.ht));
+addEventListener('keydown', e => { if (e.target.closest('input,textarea')) return; if (e.key === 'ArrowLeft' && scrollY < innerHeight*.6) go(cur-1); if (e.key === 'ArrowRight' && scrollY < innerHeight*.6) go(cur+1); });
+let tx = null; const hero = $('#top');
+hero.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+hero.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1)); tx = null; });
 
-// Стена обложек
-$('#grid').innerHTML = A.tracks.map((t,i) =>
-  '<button class="cell" type="button" data-g="'+i+'" aria-label="Играть: '+esc(t.title)+'"><img src="'+t.cover+'" alt="">'+
-  '<span class="cap"><b>'+esc(t.title)+'</b><i><svg viewBox="0 0 24 24">'+PLAY+'</svg></i></span></button>').join('');
-$$('[data-g]').forEach(b => b.onclick = () => toggleOrPlay(A.tracks, +b.dataset.g));
+// Треклист выбранного альбома
+let shown = 0;
+$('#aTabs').innerHTML = AL.map((a,i) => '<button type="button" role="tab" data-at="'+i+'"><img src="'+a.cover+'" alt="">'+esc(a.title)+'</button>').join('');
+$$('[data-at]').forEach(b => b.onclick = () => go(+b.dataset.at));
+function showAlbum(i){
+  shown = i; const a = AL[i];
+  $$('[data-at]').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.at === i)));
+  $('#aLabel').textContent = 'Альбом · '+a.year+' · '+a.tracks.length+' треков · '+mins(a)+' мин';
+  $('#aTitle').textContent = a.title;
+  $('#tracks').innerHTML = a.tracks.map((t,j) =>
+    '<li class="tr" data-i="'+j+'"><div class="trh"><span class="n">'+two(j+1)+'</span><img class="th" src="'+t.img+'" alt="" loading="lazy">'+
+    '<button class="t" type="button" data-play="'+j+'">'+esc(t.title)+'</button><span class="d">'+fmt(t.dur)+'</span>'+
+    (t.lyrics ? '<button class="x" type="button" data-ly="'+j+'" aria-expanded="false">Текст</button>' : '<span class="x" aria-hidden="true"></span>')+'</div>'+
+    (t.lyrics ? '<div class="lyr" id="ly'+j+'" hidden><span></span><pre>'+esc(t.lyrics)+'</pre></div>' : '')+'</li>').join('');
+  $$('[data-play]').forEach(b => b.onclick = () => toggleOrPlay(a.tracks, +b.dataset.play));
+  $$('[data-ly]').forEach(b => b.onclick = () => { const el = $('#ly'+b.dataset.ly); el.hidden = !el.hidden; b.setAttribute('aria-expanded', String(!el.hidden)); b.textContent = el.hidden ? 'Текст' : 'Скрыть'; });
+  sync();
+}
+
+// Стена обложек: только песни со своей обложкой
+const WALL = []; AL.forEach(a => a.tracks.forEach((t,j) => { if (t.cover) WALL.push([a.tracks, j]); }));
+$('#grid').innerHTML = WALL.map(([l,j],k) => { const t = l[j];
+  return '<button class="cell" type="button" data-g="'+k+'" aria-label="Играть: '+esc(t.title)+'"><img src="'+t.cover+'" alt="" loading="lazy">'+
+  '<span class="cap"><span><b>'+esc(t.title)+'</b><small>'+esc(t.album.title)+'</small></span><i><svg viewBox="0 0 24 24">'+PLAY+'</svg></i></span></button>'; }).join('');
+$$('[data-g]').forEach(b => b.onclick = () => { const [l,j] = WALL[+b.dataset.g]; toggleOrPlay(l, j); });
 
 // Синглы
-$('#sgrid').innerHTML = S.tracks.map((t,i) =>
-  '<div class="single"><div class="cv"><img src="'+t.cover+'" alt="Обложка сингла «'+esc(t.title)+'»"></div>'+
+$('#sgrid').innerHTML = SG.map((t,i) =>
+  '<div class="single"><div class="cv"><img src="'+t.cover+'" alt="Обложка сингла «'+esc(t.title)+'»" loading="lazy"></div>'+
   '<div class="row"><b>'+esc(t.title)+'</b><span class="mono" style="color:var(--mute);font-size:12px">'+t.date+'</span></div>'+
   '<div class="act">'+(t.src ? '<button type="button" data-s="'+i+'">Слушать здесь</button>' : '')+(t.link ? '<a href="'+t.link+'">Apple Music →</a>' : '')+'</div></div>').join('');
-$$('[data-s]').forEach(b => b.onclick = () => toggleOrPlay(S.tracks, +b.dataset.s));
+$$('[data-s]').forEach(b => b.onclick = () => toggleOrPlay(SG, +b.dataset.s));
 
 // Плеер
-function load(l, i){ list = l; idx = i; const t = l[i]; audio.src = t.src; $('#pTitle').textContent = t.title; $('#pCover').src = t.cover || 'img/album1.jpg'; $('#tDur').textContent = fmt(t.dur); $('#player').classList.add('on'); }
+function load(l, i){ list = l; idx = i; const t = l[i]; audio.src = t.src; $('#pTitle').innerHTML = esc(t.title) + (t.album ? ' <span>· '+esc(t.album.title)+'</span>' : ''); $('#pCover').src = t.img; $('#tDur').textContent = fmt(t.dur); $('#player').classList.add('on'); }
 function toggleOrPlay(l, i){
   if (list === l && idx === i && audio.src) { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); return; }
-  if (!l[i].src) return; load(l, i); startViz(); audio.play().catch(()=>{});
+  if (!l[i].src) return; load(l, i); audio.play().catch(()=>{});
 }
 function step(d){ for (let k=1;k<=list.length;k++){ const j=(idx+d*k+list.length*k)%list.length; if (list[j].src) return toggleOrPlay(list, j); } }
 function sync(){
   const playing = !audio.paused;
   $('#ico').innerHTML = playing ? PAUSE : PLAY; $('#toggle').setAttribute('aria-label', playing ? 'Пауза' : 'Играть');
   $('#player').classList.toggle('playing', playing);
-  const inA = list === A.tracks;
-  $('#heroIco').innerHTML = playing && inA ? PAUSE : PLAY; $('#heroTxt').textContent = playing && inA ? 'Пауза' : 'Слушать';
+  $$('[data-hp]').forEach(b => { const on = playing && list === AL[+b.dataset.hp].tracks; b.querySelector('svg').innerHTML = on ? PAUSE : PLAY; b.querySelector('span').textContent = on ? 'Пауза' : 'Слушать'; });
+  const inA = list === AL[shown].tracks;
   $$('.tr').forEach(r => r.classList.toggle('now', inA && +r.dataset.i === idx));
-  $$('.cell').forEach(c => { const on = inA && +c.dataset.g === idx; c.classList.toggle('now', on); c.querySelector('svg').innerHTML = on && playing ? PAUSE : PLAY; });
+  $$('.cell').forEach(c => { const [l,j] = WALL[+c.dataset.g]; const on = l === list && j === idx; c.classList.toggle('now', on); c.querySelector('svg').innerHTML = on && playing ? PAUSE : PLAY; });
 }
 audio.onplay = sync; audio.onpause = sync; audio.onended = () => step(1);
 audio.ontimeupdate = () => { if (!audio.duration) return; $('#seek').value = audio.currentTime/audio.duration*100; $('#tCur').textContent = fmt(audio.currentTime); };
 audio.onloadedmetadata = () => $('#tDur').textContent = fmt(audio.duration);
 $('#seek').oninput = e => { if (audio.duration) audio.currentTime = e.target.value/100*audio.duration; };
-$('#toggle').onclick = () => { if (idx < 0) return toggleOrPlay(A.tracks, 0); audio.paused ? audio.play().catch(()=>{}) : audio.pause(); };
+$('#toggle').onclick = () => { if (idx < 0) return toggleOrPlay(AL[cur].tracks, 0); audio.paused ? audio.play().catch(()=>{}) : audio.pause(); };
 $('#next').onclick = () => step(1); $('#prev').onclick = () => step(-1);
-$('#heroPlay').onclick = $('#albumPlay').onclick = () => toggleOrPlay(A.tracks, idx >= 0 && list === A.tracks ? idx : 0);
 
-// Голос над водой: линия между мостками, оживает от музыки
-const cv = $('#wave'), cx = cv.getContext('2d'); let an = null, buf = null, ac = null;
-function startViz(){
-  if (ac) { ac.resume && ac.resume(); return; }
-  try { ac = new (window.AudioContext||window.webkitAudioContext)(); const src = ac.createMediaElementSource(audio); an = ac.createAnalyser(); an.fftSize = 1024; buf = new Uint8Array(an.fftSize); src.connect(an); an.connect(ac.destination); } catch(e) { an = null; }
-}
-function size(){ const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio||1); cv.width = r.width*d; cv.height = r.height*d; }
-size(); addEventListener('resize', size);
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-function draw(t){
-  const w = cv.width, h = cv.height; cx.clearRect(0,0,w,h);
-  const narrow = innerWidth < 600, x0 = w*(narrow?0.22:0.235), x1 = w*(narrow?0.78:0.775), y = h*(narrow?0.6:0.605);
-  const live = an && !audio.paused; if (live) an.getByteTimeDomainData(buf);
-  cx.beginPath();
-  for (let i=0;i<=200;i++){
-    const p = i/200, x = x0 + (x1-x0)*p, env = Math.sin(Math.PI*p);
-    let v = live ? (buf[Math.floor(p*(buf.length-1))]-128)/128 : Math.sin(p*18 + t/700)*0.08;
-    cx[i?'lineTo':'moveTo'](x, y + v*env*h*(live?0.09:0.012));
-  }
-  cx.strokeStyle = live ? 'rgba(196,88,60,.9)' : 'rgba(60,45,62,.35)'; cx.lineWidth = Math.max(1, w/900); cx.stroke();
-  if (!still) requestAnimationFrame(draw);
-}
-requestAnimationFrame(draw);
+go(0);
 </script>
 </body>
 </html>
