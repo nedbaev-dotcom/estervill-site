@@ -107,6 +107,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .cell .cap small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#cfc7b8}
 .cell .cap i{font-style:normal;width:40px;height:40px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
 .cell .cap svg{width:14px;height:14px;fill:#fff}
+.cell .tag{position:absolute;inset:auto 0 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(9,9,10,.85));font-family:var(--display);font-size:22px;line-height:1.1;text-align:left;transition:opacity .4s}
+.cell:hover .tag,.cell.now .tag{opacity:0}
 .cell.now{outline:2px solid var(--red);outline-offset:-2px}
 
 /* ---------- SINGLES ---------- */
@@ -209,7 +211,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <section class="wall" id="songs">
   <div class="wrap">
-    <div class="head"><div><span class="label">У каждой песни — своя обложка</span><h2>Песни</h2></div><p>Нажмите на обложку, чтобы послушать песню.</p></div>
+    <div class="head"><div><span class="label">Все песни · три альбома</span><h2>Песни</h2></div><p>Все песни группы в одном месте. Нажмите на обложку, чтобы послушать.</p></div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
@@ -311,10 +313,10 @@ function showAlbum(i){
   sync();
 }
 
-// Стена обложек: только песни со своей обложкой
-const WALL = []; AL.forEach(a => a.tracks.forEach((t,j) => { if (t.cover) WALL.push([a.tracks, j]); }));
+// Все песни всех альбомов
+const WALL = []; AL.forEach(a => a.tracks.forEach((t,j) => WALL.push([a.tracks, j])));
 $('#grid').innerHTML = WALL.map(([l,j],k) => { const t = l[j];
-  return '<button class="cell" type="button" data-g="'+k+'" aria-label="Играть: '+esc(t.title)+'"><img src="'+t.cover+'" alt="" loading="lazy">'+
+  return '<button class="cell" type="button" data-g="'+k+'" aria-label="Играть: '+esc(t.title)+'"><img src="'+t.img+'" alt="" loading="lazy">'+(t.cover?'':'<span class="tag">'+esc(t.title)+'</span>')+
   '<span class="cap"><span><b>'+esc(t.title)+'</b><small>'+esc(t.album.title)+'</small></span><i><svg viewBox="0 0 24 24">'+PLAY+'</svg></i></span></button>'; }).join('');
 $$('[data-g]').forEach(b => b.onclick = () => { const [l,j] = WALL[+b.dataset.g]; toggleOrPlay(l, j); });
 
